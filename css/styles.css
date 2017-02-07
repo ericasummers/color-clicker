@@ -1,5 +1,6 @@
 body{
-  position:relative;
+
+  height:100%;
   overflow:hidden;
 }
 
@@ -8,11 +9,19 @@ form{
 }
 
 #playerMetrics{
-  margin:30px;
+  position:absolute;
+  bottom: 2%;
+  left:1%;
+  background:rgba(40, 40, 40, 0.4);
+  font-weight: bold;
+  letter-spacing: 2px;
+  color:white;
+  border: 4px double black;
+  z-index: 99999;
 }
 
 .colorBox{
-  
+  opacity: 1;
   height:150px;
   width:150px;
   border: 3px double grey;

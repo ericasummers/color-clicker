@@ -9,19 +9,27 @@
     <script src="js/scripts.js"></script>
   </head>
   <body>
-
+    <div id="playerMetrics">
+      <p>Score: <span id="playerScore"></span></p>
+      <p>Boxes popped: <span id="poppedBoxes"></span></p>
+      <p>Time added: <span id="timeAdded"></span></p>
+    </div>
+    
     <form id="gameOptions">
       <h1 id="formTitle">Would you like to play Color clicker.</h1>
       <div class="form-group">
         <label for="gameTime">How long would you like the game to last?</label>
         <input type="number" name="gameTime" id="gameTime" class="form-control" value="60">
       </div>
+      <label for="difficultyLevel">Select your difficulty level:</label>
+      <select class="form-group" id="difficulty">
+        <option value="100">Easy</option>
+        <option value="50" selected="selected">Medium</option>
+        <option value="25">Hard</option>
+      </select>
       <button type="submit" class="btn btn-primary">Begin</button>
     </form>
-    <div id="playerMetrics">
-      <p>Score: <span id="playerScore"></span></p>
-      <p>Boxes popped: <span id="poppedBoxes"></span></p>
-      <p>Time added: <span id="timeAdded"></span></p>
-    </div>
+
+
   </body>
 </html>

@@ -1,5 +1,6 @@
 var playerScore = 0;
 var colorId = 1;
+var fadeTime = 50;
 
 function colorBox(color, pointValue, screenTime) {
   this.color = color;
@@ -12,9 +13,18 @@ var boxDict = {
 };
 
 function fadeAway(screenTime) {
+  var divId = $("#"+colorId);
+  var thisOpacity = 1;
+  var fadeAmt = fadeTime/screenTime;//0.05;
+  setInterval(function() {
+
+    divId.css("opacity", thisOpacity - fadeAmt);
+    thisOpacity -= fadeAmt;
+  }, fadeTime);
+
   setTimeout(function() {
     $("#"+colorId).remove();
-  }, screenTime)
+  }, screenTime);
 }
 
 function spawnBox() {
@@ -29,13 +39,13 @@ function spawnBox() {
     var ypos = Math.ceil(Math.random()*$(window).height()-150);
 
 
-    $("body").append("<div class='colorBox' id='" + colorId + "'></div>");
+    $("body").append("<div class='colorBox' id='" + colorId + "' pointValue='"+ newBox.pointValue +"'></div>");
     $("body").children("div").last().css({"position":"absolute", "top":ypos, "left":xpos, "background-color":newBox.color.toString()});
     //$("body").children("div").last().fadeOut(newBox.screenTime);
     fadeAway(newBox.screenTime);
     $("body").children("div").last().click(function(){
-      playerScore += newBox.pointValue;
-      $(this).fadeOut(10);
+      playerScore += parseInt($(this).attr("pointValue"));
+      $(this).fadeOut(50);
       $("#playerScore").text(playerScore);
     });
   }
@@ -51,6 +61,7 @@ $(document).ready(function() {
     event.preventDefault();
 
     var gameTime = $("#gameTime").val();
+    fadeTime = parseInt($("#difficulty").val());
     $("#gameOptions").fadeOut();
 
 
