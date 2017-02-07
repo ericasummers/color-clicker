@@ -68,7 +68,10 @@ $(document).ready(function() {
 
     var allColorBoxes = setInterval(function(){
       gameLoop();
-      console.log("tick");
     }, 750);
+    setTimeout(function(){
+      clearInterval(allColorBoxes);
+    }, gameTime*1000);
+
   });
 });
