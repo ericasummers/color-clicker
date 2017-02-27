@@ -45,7 +45,8 @@ function spawnBox() {
     fadeAway(newBox.screenTime);
     $("body").children("div").last().click(function(){
       playerScore += parseInt($(this).attr("pointValue"));
-      $(this).fadeOut(50);
+    //   $(this).fadeOut(50);
+      $(this).addClass("animated rollOut");
       $("#playerScore").text(playerScore);
     });
   }
