@@ -7,3 +7,15 @@
 |visual effects/animations| "shooting" effect, destruction/fade/move out block animation|
 |moving elements| blocks that spawn moving or move after spawn.|
 |background image/animation| a background image or animation which may be affected by gameplay|
+
+For March 12, 2017:
+- Build in PHP database to store box info/scores? (EW)
+- Change colors to hex values dependent on a buffer value (DS)
+- Add in sound-effects (DS)
+
+Long goals:
+- Blocks that modify timing
+- Multiple levels (timed, and unlimited time)
+- Different shapes (vectors)
+- Vector rigs/animations
+- Background animation (dependent on game state)

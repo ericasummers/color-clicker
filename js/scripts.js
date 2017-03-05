@@ -23,7 +23,7 @@ function fadeAway(screenTime) {
   }, fadeTime);
 
   setTimeout(function() {
-    $("#"+divId).remove();
+    divId.remove();
   }, screenTime);
 }
 
