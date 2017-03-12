@@ -122,7 +122,7 @@ $(document).ready(function() {
           alert()
           $("#add-score").show();
           $("#playerMetrics").hide();
-          $("#player_ score").val("playerScore");
+          $("#player_score").val(playerScore);
         }
     }, 10);
 

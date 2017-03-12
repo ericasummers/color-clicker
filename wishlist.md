@@ -13,6 +13,12 @@ For March 12, 2017:
 - Change colors to hex values dependent on a buffer value (DS)
 - Add in sound-effects (DS)
 
+For March 19, 2017:
+- (DS & EW) finish last weeks work
+- Look into canvas with more complex shapes and images(DS)
+- Make game state object in JS and PHP(EW)
+- Research into background animations (DS/EW)
+
 Long goals:
 - Blocks that modify timing
 - Multiple levels (timed, and unlimited time)
