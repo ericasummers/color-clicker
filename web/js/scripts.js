@@ -88,6 +88,9 @@ $(document).ready(function() {
           clearInterval(gameTimer);
           timerOutput.text("game finished.");
           alert()
+          $("#add-score").show();
+          $("#playerMetrics").hide();
+          $("input#player-score").val("playerScore");
         }
     }, 10);
 

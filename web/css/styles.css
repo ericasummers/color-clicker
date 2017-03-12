@@ -35,3 +35,7 @@ form{
   font-size: 36px;
   font-family: monospace;
 }
+
+#add-score {
+    display: none;
+}

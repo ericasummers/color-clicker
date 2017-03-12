@@ -19,22 +19,23 @@
     Request::enableHttpMethodParameterOverride();
 
     $app->get("/", function() use ($app) {
-        $blank_form = array();
 
-        return $app['twig']->render('home.html.twig', array('stylists' => Stylist::getAll()));
+        return $app['twig']->render('home.html.twig', array('scores' => Score::getAll()));
     });
 
-    $app->post("/add-stylist", function() use ($app) {
-        $name = $_POST['name'];
-        $specialty = $_POST['specialty'];
-        $blank_form = array();
-        if (!$name || !$specialty) {
-            array_push($blank_form, "empty");
-        } else {
-            $new_stylist = new Stylist($name, $specialty);
-            $new_stylist->save();
-        }
-        return $app['twig']->render('home.html.twig', array('stylists' => Stylist::getAll(), 'blank_form' => $blank_form));
+    $app->post("/add-score", function() use ($app) {
+        $name = $_POST['player_name'];
+        $score = $_POST['player_score'];
+        $new_score = new Score($name, $score);
+        $new_score->save();
+
+        return $app['twig']->render('home.html.twig', array('scores' => Score::getAll()));
+    });
+
+    $app->delete("/delete_all", function() use ($app) {
+        Score::deleteAll();
+
+        return $app['twig']->render('home.html.twig', array('scores' => Score::getAll()));
     });
 
     return $app;

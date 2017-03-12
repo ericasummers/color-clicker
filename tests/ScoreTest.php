@@ -7,7 +7,7 @@
 
     require_once 'src/Score.php';
 
-    $server = 'mysql:host=localhost:3306;dbname=color_clicker_test';
+    $server = 'mysql:host=localhost:8889;dbname=color_clicker_test';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
