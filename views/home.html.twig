@@ -12,7 +12,7 @@
   </head>
   <body>
     <div id="playerMetrics">
-      <p>Score: <span id="playerScore"></span></p>
+      <p>Score: <span class="playerScore"></span></p>
       <p>Boxes popped: <span id="poppedBoxes"></span></p>
       <p>Time added: <span id="timeAdded"></span></p>
     </div>
@@ -43,8 +43,8 @@
                 <input type="text" name="player_name" placeholder="Bob the best" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="player_score">Player Score:</label>
-                <input type="number" name="player_score" class="form-control" id="player_score" required>
+                <label for="player_score">Player Score: <span class="playerScore"></span></label>
+                <input type="hidden" name="player_score" class="form-control" value="">
             </div>
 
             <button type="submit" class="btn btn-info">Submit</button>

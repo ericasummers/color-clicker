@@ -79,7 +79,7 @@ function spawnBox() {
       playerScore += parseInt($(this).attr("pointValue"));
     //   $(this).fadeOut(50);
       $(this).addClass("animated rollOut");
-      $("#playerScore").text(playerScore);
+      $(".playerScore").text(playerScore);
     });
   }
 }
@@ -122,7 +122,7 @@ $(document).ready(function() {
           alert()
           $("#add-score").show();
           $("#playerMetrics").hide();
-          $("input#player-score").val("playerScore");
+          $("#player_ score").val("playerScore");
         }
     }, 10);
 
