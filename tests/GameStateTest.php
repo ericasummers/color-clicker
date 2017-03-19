@@ -49,7 +49,7 @@
         $new_gameState2 = new GameState($round2, $player_id2, $player_score2, $play_time2);
         $new_gameState2->save();
 
-        $result = GameState::find($new_gameState2->id);
+        $result = GameState::find($new_gameState2->player_id);
 
         $this->assertEquals([$new_gameState2], $result);
       }
