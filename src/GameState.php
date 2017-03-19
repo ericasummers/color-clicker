@@ -63,12 +63,24 @@
 
         function save()
         {
-
+          $GLOBALS['DB']->exec("INSERT INTO game_states (round, player_id, player_score, play_time) VALUES ('{$this->round}', {$this->player_id}, {$this->player_score}, {$this->play_time});");
+          $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
         static function getAll()
         {
-
+          $returned_states = $GLOBALS['DB']->query("SELECT * FROM game_states;");
+          $all_states = [];
+          foreach($returned_states as $state) {
+            $round = $state['round'];
+            $player_id = $state['player_id'];
+            $player_score = $state['player_score'];
+            $play_time = $state['play_time'];
+            $id = $state['id'];
+            $new_state = new GameState($round, $player_id, $player_score, $play_time, $id);
+            array_push($all_states, $new_state);
+          }
+          return $all_states;
         }
 
         static function deleteAll()
