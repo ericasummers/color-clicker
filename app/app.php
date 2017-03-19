@@ -19,6 +19,8 @@
     Request::enableHttpMethodParameterOverride();
 
     $app->get("/", function() use ($app) {
+      $new_state = new GameState('1', 1, 0, 50);
+      $new_state->save();
 
         return $app['twig']->render('home.html.twig', array('scores' => Score::getAll()));
     });
