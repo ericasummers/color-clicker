@@ -23,8 +23,8 @@
         {
             $player_name = "Bob";
             $player_score = "10";
-            $id = null;
-            $new_game = new Score($player_name, $player_score, $id);
+            // $id = null;
+            $new_game = new Score($player_name, $player_score);
             $new_game->save();
 
             $result = Score::getAll();

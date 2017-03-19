@@ -27,7 +27,6 @@
             $shape = 'square';
             $time = 1500;
             $points = 2;
-            $id = null;
             $new_box = new Box($color, $shape, $time, $points);
             $new_box->save();
 
