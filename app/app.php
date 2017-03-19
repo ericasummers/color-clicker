@@ -3,6 +3,7 @@
     require_once __DIR__."/../vendor/autoload.php";
     require_once __DIR__."/../src/Box.php";
     require_once __DIR__."/../src/Score.php";
+    require_once __DIR__."/../src/GameState.php";
 
     $app = new Silex\Application();
 
@@ -19,10 +20,12 @@
     Request::enableHttpMethodParameterOverride();
 
     $app->get("/", function() use ($app) {
-      $new_state = new GameState('1', 1, 0, 50);
+      $new_state = new GameState();
       $new_state->save();
+      $player_id = 1;
+      $new_state->setPlayerId($player_id);
 
-        return $app['twig']->render('home.html.twig', array('scores' => Score::getAll()));
+        return $app['twig']->render('home.html.twig', array('scores' => Score::getAll(), 'state_id' => $new_state->getId()));
     });
 
     $app->post("/add-score", function() use ($app) {

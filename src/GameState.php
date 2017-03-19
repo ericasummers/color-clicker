@@ -7,7 +7,7 @@
         public $player_score;
         public $play_time;
 
-        function __construct($round, $player_id, $player_score, $play_time, $id = null)
+        function __construct($round = 1, $player_id = null, $player_score = 0, $play_time = 0, $id = null)
         {
             $this->round = $round;
             $this->player_id = $player_id;
