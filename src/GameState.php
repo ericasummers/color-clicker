@@ -88,6 +88,11 @@
           $GLOBALS['DB']->exec("DELETE FROM game_states;");
         }
 
+        static function find($player_id)
+        {
+          
+        }
+
     }
 
 ?>
