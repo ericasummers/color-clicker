@@ -122,7 +122,8 @@ $(document).ready(function() {
           alert()
           $("#add-score").show();
           $("#playerMetrics").hide();
-          $("#player_score").val(playerScore);
+          document.getElementById('player_score').setAttribute('value', playerScore);
+          // $("#player_score").val(playerScore);
         }
     }, 10);
 
