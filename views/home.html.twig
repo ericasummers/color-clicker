@@ -11,63 +11,64 @@
 
   </head>
   <body>
-    <div id="playerMetrics">
-      <p>Score: <span class="playerScore"></span></p>
-      <p>Boxes popped: <span id="poppedBoxes"></span></p>
-      <p>Time added: <span id="timeAdded"></span></p>
-    </div>
-    <div id="timerContainer">
-      <p id="gameTimer"></p>
-    </div>
-
-    <form id="gameOptions" action="/start-game" method="post">
-      <img src="img/color-clicker-logo-small.gif" alt="Color Clicker Logo">
-      <h1 id="formTitle">Would you like to play Color clicker.</h1>
-      <div class="form-group">
-        <label for="gameTime">How long would you like the game to last?</label>
-        <input type="number" name="gameTime" id="gameTime" class="form-control" value="65">
+    <div id="play-area">
+      <div id="playerMetrics">
+        <p>Score: <span class="playerScore"></span></p>
+        <p>Boxes popped: <span id="poppedBoxes"></span></p>
+        <p>Time added: <span id="timeAdded"></span></p>
       </div>
-      <label for="difficultyLevel">Select your difficulty level:</label>
-      <select class="form-group" id="difficulty">
-        <option value="100">Easy</option>
-        <option value="50" selected="selected">Medium</option>
-        <option value="25">Hard</option>
-      </select>
-      <input type="hidden" name="state_id" id="state_id" class="form-control" value="{{ state_id }}">
+      <div id="timerContainer">
+        <p id="gameTimer"></p>
+      </div>
 
-      <button type="submit" class="btn btn-primary">Begin</button>
-    </form>
-    <div id="add-score">
-        <form class="end-score" action="/add-score" method="post">
-            <h3>Add my score:</h3>
-            <div class="form-group">
-                <label for="player_name">Player Name:</label>
-                <input type="text" name="player_name" placeholder="Bob the best" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="player_score">Player Score: <span class="playerScore"></span></label>
-                <input type="hidden" name="player_score" id="player_score" class="form-control" value="">
-            </div>
-            <input type="hidden" name="state_id" id="state_id" class="form-control" value="{{ state_id }}">
+      <form id="gameOptions" action="/start-game" method="post">
+        <img src="img/color-clicker-logo-small.gif" alt="Color Clicker Logo">
+        <h1 id="formTitle">Would you like to play Color clicker.</h1>
+        <div class="form-group">
+          <label for="gameTime">How long would you like the game to last?</label>
+          <input type="number" name="gameTime" id="gameTime" class="form-control" value="65">
+        </div>
+        <label for="difficultyLevel">Select your difficulty level:</label>
+        <select class="form-group" id="difficulty">
+          <option value="100">Easy</option>
+          <option value="50" selected="selected">Medium</option>
+          <option value="25">Hard</option>
+        </select>
+        <input type="hidden" name="state_id" id="state_id" class="form-control" value="{{ state_id }}">
 
-            <button type="submit" class="btn btn-info">Submit and Keep Playing</button>
-        </form>
+        <button type="submit" class="btn btn-primary">Begin</button>
+      </form>
+      <div id="add-score">
+          <form class="end-score" action="/add-score" method="post">
+              <h3>Add my score:</h3>
+              <div class="form-group">
+                  <label for="player_name">Player Name:</label>
+                  <input type="text" name="player_name" placeholder="Bob the best" class="form-control" required>
+              </div>
+              <div class="form-group">
+                  <label for="player_score">Player Score: <span class="playerScore"></span></label>
+                  <input type="hidden" name="player_score" id="player_score" class="form-control" value="">
+              </div>
+              <input type="hidden" name="state_id" id="state_id" class="form-control" value="{{ state_id }}">
 
-        <form action="/" method="get">
-          <button type="submit" class="btn btn-success">Restart</button>
-        </form>
+              <button type="submit" class="btn btn-info">Submit and Keep Playing</button>
+          </form>
 
-        <h2>High Scores:</h2>
-        <ul>
-        {% for score in scores %}
-            <li>Player Name: {{ score.player_name }} || Score: {{ score.player_score }}</li>
-        {% endfor %}
-        </ul>
-        <form action="/delete_all" method="post">
-            <input type="hidden" name="_method" value="delete">
-            <button type="submit" class="btn btn-danger">Clear Scores</button>
-        </form>
+          <form action="/" method="get">
+            <button type="submit" class="btn btn-success">Restart</button>
+          </form>
+
+          <h2>High Scores:</h2>
+          <ul>
+          {% for score in scores %}
+              <li>Player Name: {{ score.player_name }} || Score: {{ score.player_score }}</li>
+          {% endfor %}
+          </ul>
+          <form action="/delete_all" method="post">
+              <input type="hidden" name="_method" value="delete">
+              <button type="submit" class="btn btn-danger">Clear Scores</button>
+          </form>
+      </div>
     </div>
-
   </body>
 </html>

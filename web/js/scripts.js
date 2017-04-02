@@ -123,7 +123,6 @@ $(document).ready(function() {
           $("#add-score").show();
           $("#playerMetrics").hide();
           document.getElementById('player_score').setAttribute('value', playerScore);
-          // $("#player_score").val(playerScore);
         }
     }, 10);
 

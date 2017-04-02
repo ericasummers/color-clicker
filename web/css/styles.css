@@ -39,3 +39,26 @@ form{
 #add-score {
     display: none;
 }
+
+@keyframes animatedBackground {
+  from { background-position: 0 0; }
+  to { background-position: 100% 0; }
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  background-image: url(../img/clouds-tile.jpg);
+  background-position: 0px 0px;
+  background-repeat: repeat-x repeat-y;
+
+  animation: animatedBackground 60s linear infinite;
+}
+
+#play-area {
+
+}
+
+img {
+  height: 100%;
+}
