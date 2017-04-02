@@ -3,15 +3,13 @@
     {
         public $id;
         public $round;
-        public $player_id;
-        public $player_score;
+        public $total_score;
         public $play_time;
 
-        function __construct($round = 1, $player_id = null, $player_score = 0, $play_time = 0, $id = null)
+        function __construct($play_time = 0, $round = 1, $total_score = 0, $id = null)
         {
             $this->round = $round;
-            $this->player_id = $player_id;
-            $this->player_score = $player_score;
+            $this->total_score = $total_score;
             $this->play_time = $play_time;
             $this->id = $id;
         }
@@ -23,27 +21,17 @@
 
         function setRound($round)
         {
-          $this->round = (string) $round;
+          $this->round = $round;
         }
 
-        function getPlayerId()
+        function getTotalScore()
         {
-          return $this->player_id;
+          return $this->total_score;
         }
 
-        function setPlayerId($new_id)
+        function setTotalScore($new_score)
         {
-          $this->player_id = $new_id;
-        }
-
-        function getPlayerScore()
-        {
-          return $this->player_score;
-        }
-
-        function setPlayerScore($new_score)
-        {
-          $this->player_score = $new_score;
+          $this->total_score = $new_score;
         }
 
         function getPlayTime()
@@ -63,7 +51,7 @@
 
         function save()
         {
-          $GLOBALS['DB']->exec("INSERT INTO game_states (round, player_id, player_score, play_time) VALUES ('{$this->round}', {$this->player_id}, {$this->player_score}, {$this->play_time});");
+          $GLOBALS['DB']->exec("INSERT INTO game_states (round, total_score, play_time) VALUES ({$this->round}, {$this->total_score}, {$this->play_time});");
           $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
@@ -72,12 +60,11 @@
           $returned_states = $GLOBALS['DB']->query("SELECT * FROM game_states;");
           $all_states = [];
           foreach($returned_states as $state) {
-            $round = $state['round'];
-            $player_id = $state['player_id'];
-            $player_score = $state['player_score'];
             $play_time = $state['play_time'];
+            $round = $state['round'];
+            $total_score = $state['total_score'];
             $id = $state['id'];
-            $new_state = new GameState($round, $player_id, $player_score, $play_time, $id);
+            $new_state = new GameState($play_time, $round, $total_score, $id);
             array_push($all_states, $new_state);
           }
           return $all_states;
@@ -88,18 +75,16 @@
           $GLOBALS['DB']->exec("DELETE FROM game_states;");
         }
 
-        static function find($player_id)
+        static function find($id)
         {
-          $found_state = [];
-          $result = $GLOBALS['DB']->query("SELECT * FROM game_states WHERE player_id = {$player_id};");
+          $found_state = null;
+          $result = $GLOBALS['DB']->query("SELECT * FROM game_states WHERE id = {$id};");
           foreach($result as $state) {
-            $round = $state['round'];
-            $player_id = $state['player_id'];
-            $player_score = $state['player_score'];
             $play_time = $state['play_time'];
+            $round = $state['round'];
+            $total_score = $state['total_score'];
             $id = $state['id'];
-            $new_state = new GameState($round, $player_id, $player_score, $play_time, $id);
-            array_push($found_state, $new_state);
+            $found_state = new GameState($play_time, $round, $total_score, $id);
           }
           return $found_state;
         }
