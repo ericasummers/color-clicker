@@ -1,14 +1,25 @@
 $(document).ready(function() {
+
+  $("#gameOptions").submit(function(e){
+    e.preventDefault();
+    $("body").append("<canvas id='canvas' width='500' height='500'</canvas>");
+    var canvas = document.getElementById("canvas");
+    canvas.setAttribute("width", canvas.offsetWidth);
+    canvas.setAttribute("height", canvas.offsetHeight);
+    console.log(canvas);
+    var ctx=canvas.getContext("2d");
+
+
+    // $("canvas").show();
+
+
+
+
 var playerScore = 0;
 var colorId = 1;
 var fadeTime = 50;
 var buffer = 1;
 
-var canvas = document.getElementById("canvas");
-canvas.setAttribute("width", canvas.offsetWidth);
-canvas.setAttribute("height", canvas.offsetHeight);
-console.log(canvas);
-var ctx=canvas.getContext("2d");
 // var frame
 
 
@@ -16,9 +27,9 @@ var gameTime = 60000;//$("#gameTime").val() * 1000;
 var timerOutput = $("#gameTimer");
 var startTime = Date.now();
 
-function colorBox(color, blocktype, pointValue, screenTime, context,canvas) {//add sound/animation later
-  this.width = 150;
-  this.height = 150;
+function colorBox(color, blocktype, pointValue, screenTime, context, canvas) {//add sound/animation later
+  this.width = 100;
+  this.height = 100;
   this.color = color;
   this.x=Math.ceil(Math.random()*canvas.width)-75;//removed -150 from both
   this.y=Math.ceil(Math.random()*canvas.height)-20;
@@ -28,6 +39,8 @@ function colorBox(color, blocktype, pointValue, screenTime, context,canvas) {//a
   this.id = colorId;
   this.ctx=context;
   this.clicked=false;
+  this.xMove = Math.random()*4-2;
+  this.yMove = Math.random()*4-2;
   // this.context=ctx; ctx will never change, probably never need this
 
 
@@ -53,6 +66,7 @@ function colorBox(color, blocktype, pointValue, screenTime, context,canvas) {//a
 updateBlock=function(block){
   block.screenTime -=20;
   ctx.fillStyle = block.color;
+  console.log("rendering");
   ctx.fillRect(block.x, block.y, block.width, block.height);
 }
 var colorDict = {"standard":"#800080"};//defines the base color for a type of block, in this case only standard point blocks
@@ -62,6 +76,7 @@ var boxDict = {
   3:new colorBox('#800080',"standard", -1, 2500, ctx, canvas)
 };
 function spawn(random){
+  console.log("I should be spawning");
   var roll = Math.ceil(Math.random()*3);
   if(roll===1){
     return new colorBox('#ff0000',"standard", 2, 1500, ctx, canvas);
@@ -80,6 +95,7 @@ function spawn(random){
   var myGamePiece;
   var myGameArea = {
     canvas : canvas,
+    boxesPopped: 0,
     blocks:[],
     x:10000000,
     y:10000000,
@@ -96,42 +112,17 @@ function spawn(random){
         this.time;
         this.update = function() {
             // ctx = myGameArea.context;
-            if (this.type == "text" && this.width !== "29px") {
-                ctx.font = this.width + " " + this.height;
-                ctx.fillStyle = color;
-                ctx.fillText(this.text, this.x, this.y);
-            } else if (this.width ==="29px") {
-              var elapsedTime = Date.now() - startTime;
-              var remainingTime = gameTime - elapsedTime;
-              var ms = ((remainingTime%1000)).toFixed(0);
-              var seconds =  (((remainingTime / 1000)%60 )).toFixed(0);
-              var minutes = Math.floor((remainingTime / 1000)/60 % 60).toFixed(0);
-              // timerOutput.text(minutes + ":" + seconds + ":" + ms );
-              this.text=minutes + ":" + seconds + ":" + ms;
-              ctx.font = this.width + " " + this.height;
-              ctx.fillStyle = color;
-              ctx.fillText(this.text, this.x, this.y);
-              // if (elapsedTime > gameTime){
-              //   // clearInterval(allColorBoxes);
-              //   // clearInterval(gameTimer);
-              //   timerOutput.text("game finished.");
-              //   alert()
-              //   $("#add-score").show();
-              //   $("#playerMetrics").hide();
-              //   document.getElementById('player_score').setAttribute('value', playerScore);
-              //   // $("#player_score").val(playerScore);
-              // }
-            } else {
+
               ctx.fillStyle = color;
               ctx.fillRect(this.x, this.y, this.width, this.height);
 
-            }
+
         }
 
       }
-      myScore = new component("30px", "Consolas", "black", 10, 40, "text");
-      myTimer = new component("29px", "Consolas", "black", 20, 80, "text");
-      canvas.addEventListener('click', function (e) {
+      // myScore = new component("30px", "Consolas", "black", 10, 40, "text");
+      // myTimer = new component("29px", "Consolas", "black", 20, 80, "text");
+          canvas.addEventListener('click', function (e) {
               myGameArea.x = e.pageX;
               myGameArea.y = e.pageY;
           });
@@ -152,11 +143,8 @@ function spawn(random){
     }
   }
   function updateGameArea() {
+    $(".playerScore").text(myGameArea.score);
     myGameArea.clear();
-    myScore.text="SCORE: " + myGameArea.score;
-    myTimer.text="TIME: " +myGameArea.time;
-    myTimer.update();
-    myScore.update();
     if(frames > 750){
       myGameArea.blocks.push(spawn([Math.ceil(Math.random()*3)]));
       myGameArea.blocks.push(spawn([Math.ceil(Math.random()*3)]));
@@ -166,8 +154,9 @@ function spawn(random){
 
     frames += 20;
     for(var i = 0; i < myGameArea.blocks.length; i++){
-      myGameArea.blocks[i].x +=Math.ceil(Math.random()*3)-2;
-      myGameArea.blocks[i].y +=Math.ceil(Math.random()*3)-2;
+      var block = myGameArea.blocks[i];
+      block.x += block.xMove;
+      block.y += block.yMove;
 
       updateBlock(myGameArea.blocks[i]);
 
@@ -184,7 +173,11 @@ function spawn(random){
       });
 
     }
-  }
+    if(!this.canvas){
+      clearInterval(myGameArea.interval);
+      this = null;
+    }
+  }//end updateGameArea
 
 
 function startGame() {
@@ -194,53 +187,5 @@ startGame();
 
 
 
-// var myGameArea = {
-//   canvas:canvas,
-//   start:function(){
-//     this.interval=setInterval(updateGameArea,20);
-//   },
-//   clear:function(){
-//     ctx.clearRect(0,0,canvas.width, canvas.height);
-//   }
-// }
-
-  //old code
-  // $("#gameOptions").submit(function(event) {
-  //   event.preventDefault();
-  //
-  //   var gameTime = $("#gameTime").val() * 1000;
-  //   fadeTime = parseInt($("#difficulty").val());
-  //   $("#gameOptions").fadeOut();
-  //   $("#gameTimer").fadeIn();
-  //
-  //
-  //
-  //   var allColorBoxes = setInterval(function(){
-  //     gameLoop();
-  //   }, 750);
-  //
-  //   var timerOutput = $("#gameTimer");
-  //   var startTime = Date.now();
-  //   console.log(Date.now());
-  //   var gameTimer = setInterval(function() {
-  //       var elapsedTime = Date.now() - startTime;
-  //       var remainingTime = gameTime - elapsedTime;
-  //       var ms = ((remainingTime%1000)).toFixed(0);
-  //       var seconds =  (((remainingTime / 1000)%60 )).toFixed(0);
-  //       var minutes = Math.floor((remainingTime / 1000)/60 % 60).toFixed(0);
-  //       timerOutput.text(minutes + ":" + seconds + ":" + ms );
-  //
-  //       if (elapsedTime > gameTime){
-  //         clearInterval(allColorBoxes);
-  //         clearInterval(gameTimer);
-  //         timerOutput.text("game finished.");
-  //         alert()
-  //         $("#add-score").show();
-  //         $("#playerMetrics").hide();
-  //         document.getElementById('player_score').setAttribute('value', playerScore);
-  //         // $("#player_score").val(playerScore);
-  //       }
-  //   }, 10);
-// });
-
 });
+})

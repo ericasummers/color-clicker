@@ -92,21 +92,21 @@ function gameLoop()
 $(document).ready(function() {
   $("#gameOptions").submit(function(event) {
     event.preventDefault();
-
+//
     var gameTime = $("#gameTime").val() * 1000;
-    fadeTime = parseInt($("#difficulty").val());
-    $("#gameOptions").fadeOut();
-    $("#gameTimer").fadeIn();
-
-
-
-    var allColorBoxes = setInterval(function(){
-      gameLoop();
-    }, 750);
-
+//     fadeTime = parseInt($("#difficulty").val());
+//     $("#gameOptions").fadeOut();
+//     $("#gameTimer").fadeIn();
+//
+//
+//
+//     var allColorBoxes = setInterval(function(){
+//       gameLoop();
+//     }, 750);
+//
     var timerOutput = $("#gameTimer");
     var startTime = Date.now();
-    console.log(Date.now());
+    //console.log(Date.now());
     var gameTimer = setInterval(function() {
         var elapsedTime = Date.now() - startTime;
         var remainingTime = gameTime - elapsedTime;
@@ -116,10 +116,11 @@ $(document).ready(function() {
         timerOutput.text(minutes + ":" + seconds + ":" + ms );
 
         if (elapsedTime > gameTime){
-          clearInterval(allColorBoxes);
+          // clearInterval(allColorBoxes);
           clearInterval(gameTimer);
           timerOutput.text("game finished.");
-          alert()
+          alert("Game over");
+          $("#canvas").remove();
           $("#add-score").show();
           $("#playerMetrics").hide();
           document.getElementById('player_score').setAttribute('value', playerScore);
