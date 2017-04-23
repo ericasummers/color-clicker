@@ -5,8 +5,11 @@ var fadeTime = 50;
 var buffer = 1;
 
 var canvas = document.getElementById("canvas");
+canvas.setAttribute("width", canvas.offsetWidth);
+canvas.setAttribute("height", canvas.offsetHeight);
+console.log(canvas);
 var ctx=canvas.getContext("2d");
-var frame
+// var frame
 
 
 var gameTime = 60000;//$("#gameTime").val() * 1000;
@@ -15,7 +18,7 @@ var startTime = Date.now();
 
 function colorBox(color, blocktype, pointValue, screenTime, context,canvas) {//add sound/animation later
   this.width = 150;
-  this.height = 40;//for some reason, 40 here displays roughly as large as 150 witdh
+  this.height = 150;
   this.color = color;
   this.x=Math.ceil(Math.random()*canvas.width)-75;//removed -150 from both
   this.y=Math.ceil(Math.random()*canvas.height)-20;
