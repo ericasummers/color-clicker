@@ -93,7 +93,7 @@ function spawn(random){
 
   var myScore;
   var myGamePiece;
-  var myGameArea = {
+   myGameArea = {
     canvas : canvas,
     boxesPopped: 0,
     blocks:[],
@@ -175,7 +175,7 @@ function spawn(random){
     }
     if(!this.canvas){
       clearInterval(myGameArea.interval);
-      this = null;
+      delete this;
     }
   }//end updateGameArea
 
