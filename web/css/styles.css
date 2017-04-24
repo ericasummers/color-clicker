@@ -2,6 +2,9 @@ body{
 
   height:100%;
   overflow:hidden;
+  background-color: #24b8fd;
+  background-image: url('../img/bg-lines.png');
+  background-repeat: repeat;
 }
 
 canvas {
@@ -18,9 +21,46 @@ canvas {
 
   /*display:none;*/
 }
+#timeInput {
+  opacity:0.8;
+  background:linear-gradient(45deg, #fc8593,#ff9bc4, #ff9bc4, #ff9bc4, #ff9bc4, #ff9bc4,  #9bb0ff , #9bb0ff);
+}
+#difficulty {
+  opacity:0.8;
+  background:linear-gradient(-45deg, #fc8593,#ff9bc4, #ff9bc4, #ff9bc4, #ff9bc4, #ff9bc4,  #9bb0ff , #9bb0ff);
+}
+
+#play-button {
+  background: #87ccdd;
+}
+#play-button:hover {
+background: #24b8fd;
+}
 
 form{
   margin:30px;
+}
+#game-logo {
+  float: left;
+}
+#gameOptions hr {
+  width:85%;
+  height:4px;
+  background-color: #FFF;
+  /*border-radius: 3px;*/
+}
+
+#gameOptions {
+  width: 500px;
+  background: rgba(110, 113, 229, 0.5);
+  padding: 15px;
+  border: groove 1px white;
+  border-radius: 10px;
+  color: white;
+}
+
+#submit-button {
+  text-align: center;
 }
 
 #playerMetrics{
