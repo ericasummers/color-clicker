@@ -23,11 +23,14 @@ canvas {
 }
 #timeInput {
   opacity:0.8;
-  background:linear-gradient(45deg, #fc8593,#ff9bc4, #ff9bc4, #ff9bc4, #ff9bc4, #ff9bc4,  #9bb0ff , #9bb0ff);
+  /*background:linear-gradient(45deg, #fc8593,#ff9bc4, #ff9bc4, #ff9bc4, #ff9bc4, #ff9bc4,  #9bb0ff , #9bb0ff);*/
 }
 #difficulty {
   opacity:0.8;
-  background:linear-gradient(-45deg, #fc8593,#ff9bc4, #ff9bc4, #ff9bc4, #ff9bc4, #ff9bc4,  #9bb0ff , #9bb0ff);
+  /*background:linear-gradient(-45deg, #fc8593,#ff9bc4, #ff9bc4, #ff9bc4, #ff9bc4, #ff9bc4,  #9bb0ff , #9bb0ff);*/
+}
+.options {
+  min-height: 3em;
 }
 
 #play-button {
@@ -73,6 +76,9 @@ form{
   color:white;
   border: 4px double black;
   z-index: 99999;
+  /*min-width: 200px;*/
+
+  display: none;
 }
 
 .colorBox{

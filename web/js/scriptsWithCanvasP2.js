@@ -1,5 +1,25 @@
-$(document).ready(function() {
+var playerScore = 0;
+var colorId = 1;
+var fadeTime = 50;
+var buffer = 1;
 
+$(document).ready(function() {
+  $("#gameOptions").submit(function(event) {
+    event.preventDefault();
+//
+    var gameTime = $("#gameTime").val() * 1000;
+//     fadeTime = parseInt($("#difficulty").val());
+    changeState();
+//
+//
+//
+//     var allColorBoxes = setInterval(function(){
+//       gameLoop();
+//     }, 750);
+//
+
+
+  });
   $("#gameOptions").submit(function(e){
     e.preventDefault();
     $("body").append("<canvas id='canvas' width='500' height='500'</canvas>");
@@ -144,6 +164,7 @@ function spawn(random){
   }
   function updateGameArea() {
     $(".playerScore").text(myGameArea.score);
+    $("#poppedBoxes").text(myGameArea.boxesPopped);
     myGameArea.clear();
     if(frames > 750){
       myGameArea.blocks.push(spawn([Math.ceil(Math.random()*3)]));
@@ -166,6 +187,7 @@ function spawn(random){
           return false;
         }
         if(block.clicked){
+          myGameArea.boxesPopped += 1;
           myGameArea.score += block.pointValue;
           return false;
         }
@@ -182,6 +204,29 @@ function spawn(random){
 
 function startGame() {
     myGameArea.start();
+    var timerOutput = $("#gameTimer");
+    var startTime = Date.now();
+    //console.log(Date.now());
+    var gameTimer = setInterval(function() {
+        var elapsedTime = Date.now() - startTime;
+        var remainingTime = gameTime - elapsedTime;
+        var ms = ((remainingTime%1000)).toFixed(0);
+        var seconds =  (((remainingTime / 1000)%60 )).toFixed(0);
+        var minutes = Math.floor((remainingTime / 1000)/60 % 60).toFixed(0);
+        timerOutput.text(minutes + ":" + seconds + ":" + ms );
+
+        if (elapsedTime > gameTime){
+          // clearInterval(allColorBoxes);
+          clearInterval(gameTimer);
+          timerOutput.text("game finished.");
+          alert("Game over");
+          $("#canvas").remove();
+          $("#add-score").show();
+          $("#playerMetrics").hide();
+          document.getElementById('player_score').setAttribute('value', playerScore);
+          // $("#player_score").val(playerScore);
+        }
+    }, 10);
 }
 startGame();
 
